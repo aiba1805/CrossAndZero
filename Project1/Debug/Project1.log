@@ -1,0 +1,11 @@
+﻿  Source (1).cpp
+c1xx : fatal error C1083: Не удается открыть файл источник: ..\..\..\..\Downloads\CircleCross\Source (1).cpp: No such file or directory
+  menu.cpp
+c1xx : fatal error C1083: Не удается открыть файл источник: ..\..\..\..\Downloads\CircleCross\menu.cpp: No such file or directory
+  game.cpp
+c1xx : fatal error C1083: Не удается открыть файл источник: ..\..\..\..\Downloads\CircleCross\game.cpp: No such file or directory
+  functions.cpp
+c1xx : fatal error C1083: Не удается открыть файл источник: ..\..\..\..\Downloads\CircleCross\functions.cpp: No such file or directory
+  console.cpp
+c1xx : fatal error C1083: Не удается открыть файл источник: ..\..\..\..\Downloads\CircleCross\console.cpp: No such file or directory
+  Создание кода...
