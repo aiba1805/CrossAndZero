@@ -1,9 +1,12 @@
 #include<iostream>
 #include<Windows.h>
 #include<conio.h>
-#include"functions.h"
+#include<time.h>
 #include"menu.h"
 #include"game.h"
+#include"functions.h"
+#include"win10h.h"
+
 using namespace std;
 
 /*
@@ -12,7 +15,7 @@ using namespace std;
 (win10h.h) функция start
 - Режим игры игрок vs игрок, игрок vs компьютер
 - В случае выбора игрок vs компьютер реализовать 3 уровня сложности (лёгий, средний, сложный).
-Лёгкий должен всегда проигрывать или сводить партию вничью. Средний должен выигрывать примерно в 50% случаях вне 
+Лёгкий должен всегда проигрывать или сводить партию вничью. Средний должен выигрывать примерно в 50% случаях вне
 зависимости от того на сколько хорошо или плохо играет игрок или сводить партию вничью. Сложный должен всегда выигрывать или сводить партию вничью
 При реализации необходимо использовать двумерный динамический массив для игрового поля. Данную игру необходимо
 будет дорабатывать в дальнейших тестах, добавляя новый функционал.
@@ -20,7 +23,8 @@ using namespace std;
 */
 
 int main() {
-	CursorHide();
+	setlocale(LC_ALL, "russian");
+	srand(time(0));
 	menu mn;
 	menu comp;
 	Field fl;
@@ -33,53 +37,50 @@ int main() {
 	comp.Add("Сложный");
 	int key;
 	mn.Print();
+	fl.x = 3;
+	fl.y = 3;
+	Init(fl);
 	bool MainMenu = true;
 	for (;;) {
-		if (kbhit()) {
-			key = getch();
+		if (_kbhit()) {
+			key = _getch();
 			if (MainMenu)
 				mn.handler(key);
 			else
 				comp.handler(key);
 			if (key == ENTER&&MainMenu&&mn.isActivPosition("Выбрать размер поля")) {
 				mn.Clear();
-				cout << "" << endl;
+				cout << "Введите размер поля" << endl;
 				cin >> fl.x;
-				cout << "" << endl;
-				cin >> fl.y;
+				fl.y = fl.x;
 				Init(fl);
-				cout << "" << endl;
+				cout << "Нажмите чтобы продолжить" << endl;
 				system("cls");
 				mn.Print();
 			}
 			else if (key == ENTER&&MainMenu&&mn.isActivPosition("Играть с компьютером")) {
 				mn.Clear();
+				start(fl.x, fl.y);
 				MainMenu = false;
 				comp.Print();
 			}
 			else if (key == ENTER&&MainMenu&&mn.isActivPosition("Играть с игроком")) {
-				Print(fl,' ');
-				char s;
-				for (int i = 0; i < (fl.x*fl.y); ++i) {
-					SetPos(0,fl.y + 5);
-					cout << "Введите O" << endl;
-					cin >> s;
-					
-					SetPos(0, fl.y + 10);
-					cout << "Введите X" << endl;
-					cin >> s;
-				}
+				start(fl.x, fl.y);
+				StartGame(fl);
+				mn.Print();
 			}
 			else if (key == ENTER&&MainMenu&&mn.isActivPosition("Выход")) {
 				exit(0);
 			}
-			else if (key == ENTER&&!MainMenu&&mn.isActivPosition("Легкий")) {
+			else if (key == ENTER && !MainMenu && comp.isActivPosition("Легкий")) {
+				comp.Clear();
+				EazyGame(fl);
+				comp.Print();
+			}
+			else if (key == ENTER && !MainMenu&&comp.isActivPosition("Средний")) {
 
 			}
-			else if (key == ENTER&&!MainMenu&&mn.isActivPosition("Средний")) {
-
-			}
-			else if (key == ENTER&&!MainMenu&&mn.isActivPosition("Сложный")) {
+			else if (key == ENTER && !MainMenu&&comp.isActivPosition("Сложный")) {
 
 			}
 		}
