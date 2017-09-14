@@ -9,6 +9,8 @@ void Init(Field& fl) {
 	for (int i = 0; i < fl.x; ++i) {
 		fl.field[i] = new char[fl.y];
 	}
+}
+void Filling(Field& fl) {
 	for (int i = 0; i < fl.x; ++i) {
 		for (int j = 0; j < fl.y; ++j) {
 			fl.field[i][j] = '$';
@@ -131,11 +133,11 @@ bool IfWin(Field fl, char symbol) {
 	}
 	return false;
 }
-bool Winner(Field fl, char symbol) {
+bool Winner(Field&fl, char symbol) {
 	if (IfWin(fl, symbol)) {
+		Filling(fl);
 		SetPos(fl.x + 5, fl.y + 5);
-		cout << "Победитель O" << endl;
-		system("cls");
+		cout << "Победитель "<<symbol << endl;
 		cout << "Нажмите чтобы продолжить" << endl;
 		cin.get();
 		system("cls");
@@ -173,9 +175,13 @@ void EazyGame(Field& fl) {
 			else {
 				symbol = 'X';
 				do {
-					pt.X = rand() % fl.x;
-					pt.Y = rand() % fl.y;
-				} while ((pt.X > 0 && pt.X < fl.x) && (pt.Y > 0 && pt.Y < fl.y) && (fl.field[pt.X][pt.Y] != 'O'));
+					do {
+						pt.X = rand()%fl.x;
+					} while (!(pt.X >= 0 && pt.X <= fl.x));
+					do {
+						pt.Y = rand() % fl.y;
+					} while (!(pt.Y >= 0 && pt.Y <= fl.y));
+				} while ((fl.field[pt.X][pt.Y] == 'O'));
 				fl.field[pt.X][pt.Y] = 'X';
 				if (fl.field[pt.X][pt.Y] == symbol) {
 					SetPos(pt.X, pt.Y);

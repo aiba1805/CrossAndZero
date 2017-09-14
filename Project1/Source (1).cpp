@@ -40,6 +40,7 @@ int main() {
 	fl.x = 3;
 	fl.y = 3;
 	Init(fl);
+	Filling(fl);
 	bool MainMenu = true;
 	for (;;) {
 		if (_kbhit()) {
@@ -54,6 +55,7 @@ int main() {
 				cin >> fl.x;
 				fl.y = fl.x;
 				Init(fl);
+				Filling(fl);
 				cout << "Нажмите чтобы продолжить" << endl;
 				system("cls");
 				mn.Print();

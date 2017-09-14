@@ -1,3 +1,2 @@
-﻿  game.cpp
-  Project1.vcxproj -> C:\Users\Айбек\source\repos\Project1\Debug\Project1.exe
-  Project1.vcxproj -> C:\Users\Айбек\source\repos\Project1\Debug\Project1.pdb (Partial PDB)
+﻿  Source (1).cpp
+c:\users\шулембековай\documents\github\crossandzero\project1\source (1).cpp(2): fatal error C1083: Не удается открыть файл включение: Windows.h: No such file or directory
